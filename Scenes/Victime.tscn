@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scripts/Victime.gd" type="Script" id=1]
+[ext_resource path="res://Images/boule2_r.png" type="Texture" id=2]
+[ext_resource path="res://Images/boule3.png" type="Texture" id=3]
+[ext_resource path="res://Images/boule1.png" type="Texture" id=4]
+[ext_resource path="res://Images/boule3_v.png" type="Texture" id=5]
+[ext_resource path="res://Images/boule1_r.png" type="Texture" id=6]
+[ext_resource path="res://Images/boule3_r.png" type="Texture" id=7]
+[ext_resource path="res://Images/boule2_v.png" type="Texture" id=8]
+[ext_resource path="res://Images/boule1_v.png" type="Texture" id=9]
+[ext_resource path="res://Images/boule2.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "b1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "b2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "b3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "r1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "r2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "r3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "v1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "v2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "v3",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 35.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 50.0
+
+[node name="Victime" type="KinematicBody2D" groups=["Mob"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "r3"
+
+[node name="Petit" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Moyen" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Gros" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

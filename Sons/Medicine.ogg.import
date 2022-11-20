@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Medicine.ogg-e92f566fc92a9b2b0a41b6b59a3d260f.oggstr"
+
+[deps]
+
+source_file="res://Sons/Medicine.ogg"
+dest_files=[ "res://.import/Medicine.ogg-e92f566fc92a9b2b0a41b6b59a3d260f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

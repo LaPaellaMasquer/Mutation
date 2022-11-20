@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://Images/background.png" type="Texture" id=3]
+[ext_resource path="res://Font/8-BIT WONDER.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://Sons/VirusHunterToonStationLevelMusic.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sons/Medicine.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Sons/song18.ogg" type="AudioStream" id=7]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1072, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Font/8-BIT WONDER.TTF"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 2 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 968, 540 )
+scale = Vector2( 2.8622, 2.94307 )
+texture = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="Spawn" type="Position2D" parent="."]
+position = Vector2( 960, 540 )
+
+[node name="MobTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="MobSpawn" type="PathFollow2D" parent="MobPath"]
+
+[node name="MobTarget" type="PathFollow2D" parent="MobPath"]
+
+[node name="hud" type="Control" parent="."]
+margin_right = 1912.0
+margin_bottom = 1080.0
+
+[node name="Score" type="Label" parent="hud"]
+margin_left = 312.0
+margin_top = 208.0
+margin_right = 617.0
+margin_bottom = 287.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="musique2" type="AudioStreamPlayer2D" parent="hud"]
+stream = ExtResource( 7 )
+
+[node name="menu" type="Control" parent="hud"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Label" parent="hud/menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 820.0
+margin_top = 484.0
+margin_right = 1080.0
+margin_bottom = 567.0
+custom_fonts/font = SubResource( 4 )
+text = "Click to start"
+align = 1
+valign = 1
+
+[node name="musique" type="AudioStreamPlayer2D" parent="hud/menu"]
+stream = ExtResource( 5 )
+
+[node name="game over" type="Control" parent="hud"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score2" type="Label" parent="hud/game over"]
+margin_left = 816.0
+margin_top = 496.0
+margin_right = 1121.0
+margin_bottom = 575.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="continue" type="Label" parent="hud/game over"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 820.0
+margin_top = 484.0
+margin_right = 1080.0
+margin_bottom = 567.0
+custom_fonts/font = SubResource( 4 )
+text = "Click to restart"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="musique2" type="AudioStreamPlayer2D" parent="hud/game over"]
+stream = ExtResource( 6 )
+
+[connection signal="hit" from="Player" to="." method="gameover"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
